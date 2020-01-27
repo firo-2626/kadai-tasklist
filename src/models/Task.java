@@ -7,14 +7,24 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "messages")
+@NamedQueries({
+    @NamedQuery(
+            // SELECT分　⇒　名前付け
+            name = "getAllTasks",
+            // 全てに対し、idをキーに取得
+            query = "SELECT m FROM Task AS m ORDER BY m.id DESC"
+            )
+})
+@Table(name = "tasks")
 
-public class Message {
+public class Task {
     @Id
-    @Column(name="id")
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
